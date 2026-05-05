@@ -1,22 +1,60 @@
-/* ===== SCRIPT.JS ===== */
-
-// Custom Cursor
+// ===== CUSTOM CURSOR =====
 document.addEventListener('mousemove', (e) => {
   document.body.style.setProperty('--cx', e.clientX + 'px');
   document.body.style.setProperty('--cy', e.clientY + 'px');
 });
 
-// Navbar scroll effect
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
+// ===== THEME TOGGLE =====
+const html = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const themeLabel = document.getElementById('themeLabel');
+
+// Load saved preference or default to dark
+const savedTheme = localStorage.getItem('km-theme') || 'dark';
+html.setAttribute('data-theme', savedTheme);
+updateToggleUI(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('km-theme', next);
+  updateToggleUI(next);
+  // Restart particles with correct visibility
+  updateParticleVisibility(next);
 });
 
-// Rotating text
+function updateToggleUI(theme) {
+  if (theme === 'dark') {
+    themeIcon.textContent = '☀️';
+    themeLabel.textContent = 'Light';
+  } else {
+    themeIcon.textContent = '🌙';
+    themeLabel.textContent = 'Dark';
+  }
+}
+
+function updateParticleVisibility(theme) {
+  const canvas = document.getElementById('particleCanvas');
+  const bgCanvas = document.querySelector('.bg-canvas');
+  if (theme === 'light') {
+    bgCanvas.style.opacity = '0';
+  } else {
+    bgCanvas.style.opacity = '1';
+  }
+}
+
+// Apply on load
+updateParticleVisibility(savedTheme);
+
+// ===== NAVBAR SCROLL =====
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ===== ROTATING HERO TEXT =====
 const titles = [
   'AI/ML Engineer',
   'Full Stack Dev',
@@ -36,13 +74,11 @@ function rotateTitle() {
     rotatingEl.style.opacity = '1';
   }, 300);
 }
-
 setInterval(rotateTitle, 2800);
 
-// Particle Canvas
+// ===== PARTICLE CANVAS =====
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
-
 let particles = [];
 let W, H;
 
@@ -65,15 +101,13 @@ class Particle {
     this.color = Math.random() > 0.6 ? '#00f5c4' : Math.random() > 0.5 ? '#7b5ea7' : '#f0a500';
     this.life = 0;
     this.maxLife = Math.random() * 300 + 200;
+    this.currentOpacity = 0;
   }
   update() {
     this.x += this.speedX;
     this.y += this.speedY;
     this.life++;
-    if (this.life > this.maxLife || this.x < 0 || this.x > W || this.y < 0 || this.y > H) {
-      this.reset();
-    }
-    // Fade in/out
+    if (this.life > this.maxLife || this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
     const progress = this.life / this.maxLife;
     this.currentOpacity = this.opacity * Math.sin(progress * Math.PI);
   }
@@ -90,14 +124,12 @@ class Particle {
   }
 }
 
-// Create particles
 for (let i = 0; i < 120; i++) {
   const p = new Particle();
-  p.life = Math.random() * p.maxLife; // stagger
+  p.life = Math.random() * p.maxLife;
   particles.push(p);
 }
 
-// Draw connecting lines between nearby particles
 function drawConnections() {
   const maxDist = 100;
   for (let i = 0; i < particles.length; i++) {
@@ -106,9 +138,8 @@ function drawConnections() {
       const dy = particles[i].y - particles[j].y;
       const dist = Math.sqrt(dx * dx + dy * dy);
       if (dist < maxDist) {
-        const alpha = (1 - dist / maxDist) * 0.08;
         ctx.save();
-        ctx.globalAlpha = alpha;
+        ctx.globalAlpha = (1 - dist / maxDist) * 0.08;
         ctx.strokeStyle = '#00f5c4';
         ctx.lineWidth = 0.5;
         ctx.beginPath();
@@ -129,20 +160,17 @@ function animate() {
 }
 animate();
 
-// Scroll reveal
+// ===== SCROLL REVEAL =====
 const revealEls = document.querySelectorAll(
   '.skill-category, .project-card, .edu-card, .vision-block, .contact-card, .section-header'
 );
-
 revealEls.forEach(el => el.classList.add('reveal'));
 
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
+  entries.forEach(entry => {
     if (entry.isIntersecting) {
       const delay = entry.target.dataset.delay || 0;
-      setTimeout(() => {
-        entry.target.classList.add('visible');
-      }, parseInt(delay));
+      setTimeout(() => entry.target.classList.add('visible'), parseInt(delay));
       observer.unobserve(entry.target);
     }
   });
@@ -150,38 +178,26 @@ const observer = new IntersectionObserver((entries) => {
 
 revealEls.forEach(el => observer.observe(el));
 
-// Stagger project cards
-document.querySelectorAll('.project-card').forEach((card, i) => {
-  card.dataset.delay = i * 120;
-});
+// Stagger delays
+document.querySelectorAll('.project-card').forEach((card, i) => { card.dataset.delay = i * 120; });
+document.querySelectorAll('.skill-category').forEach((el, i) => { el.dataset.delay = i * 100; });
 
-// Stagger skill categories
-document.querySelectorAll('.skill-category').forEach((el, i) => {
-  el.dataset.delay = i * 100;
-});
-
-// Active nav link highlighting
+// ===== ACTIVE NAV HIGHLIGHT =====
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 
 window.addEventListener('scroll', () => {
   let current = '';
   sections.forEach(section => {
-    const sectionTop = section.offsetTop - 100;
-    if (window.scrollY >= sectionTop) {
-      current = section.getAttribute('id');
-    }
+    if (window.scrollY >= section.offsetTop - 100) current = section.getAttribute('id');
   });
-
   navLinks.forEach(link => {
     link.style.color = '';
-    if (link.getAttribute('href') === '#' + current) {
-      link.style.color = 'var(--accent)';
-    }
+    if (link.getAttribute('href') === '#' + current) link.style.color = 'var(--accent)';
   });
 });
 
-// Smooth hover tilt for project cards
+// ===== 3D CARD TILT =====
 document.querySelectorAll('.project-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
@@ -189,13 +205,17 @@ document.querySelectorAll('.project-card').forEach(card => {
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     card.style.transform = `translateY(-6px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
   });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
 });
 
-// Typing effect for page load
-const heroName = document.querySelector('.hero-name');
-if (heroName) {
-  heroName.style.animation = 'fadeSlideUp 1s ease 0.2s both';
+// ===== CGPA BAR ANIMATION TRIGGER =====
+const cgpaBar = document.querySelector('.cgpa-bar');
+if (cgpaBar) {
+  const barObserver = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      cgpaBar.style.animation = 'barGrow 1.4s ease 0.2s both';
+      barObserver.disconnect();
+    }
+  }, { threshold: 0.5 });
+  barObserver.observe(cgpaBar);
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -30,9 +30,15 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="nav-status">
-      <span class="status-dot"></span>
-      <span>Open to Work</span>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon" id="themeIcon">☀️</span>
+        <span class="theme-label" id="themeLabel">Light</span>
+      </button>
+      <div class="nav-status">
+        <span class="status-dot"></span>
+        <span>Open to Work</span>
+      </div>
     </div>
   </nav>
 
@@ -53,8 +59,8 @@
           <span class="rotating-text" id="rotatingText">AI/ML Engineer</span>
         </div>
         <p class="hero-bio">
-          Building intelligent systems at the intersection of <em>Generative AI</em>, 
-          <em>Full Stack Development</em>, and <em>Human-Centered Design</em>. 
+          Building intelligent systems at the intersection of <em>Generative AI</em>,
+          <em>Full Stack Development</em>, and <em>Human-Centered Design</em>.
           Passionate about turning complex problems into elegant, AI-powered solutions.
         </p>
         <div class="hero-cta">
@@ -75,7 +81,6 @@
           <div class="avatar-ring ring-2"></div>
           <div class="avatar-ring ring-3"></div>
           <div class="avatar-container">
-            <!-- SVG Avatar / Initials fallback since no image provided -->
             <div class="avatar-initials" id="avatarDisplay">
               <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="avatar-svg">
                 <defs>
@@ -83,37 +88,27 @@
                     <stop offset="0%" style="stop-color:#00f5c4;stop-opacity:1" />
                     <stop offset="100%" style="stop-color:#7b5ea7;stop-opacity:1" />
                   </linearGradient>
-                  <clipPath id="circle">
-                    <circle cx="100" cy="100" r="100"/>
-                  </clipPath>
                 </defs>
-                <!-- Background -->
                 <circle cx="100" cy="100" r="100" fill="#0a0f1e"/>
-                <!-- Body silhouette -->
                 <ellipse cx="100" cy="155" rx="55" ry="35" fill="url(#avatarGrad)" opacity="0.3"/>
-                <!-- Head -->
                 <circle cx="100" cy="82" r="38" fill="url(#avatarGrad)" opacity="0.85"/>
-                <!-- Shoulders -->
                 <path d="M30 180 Q60 135 100 130 Q140 135 170 180" fill="url(#avatarGrad)" opacity="0.6"/>
-                <!-- Tech overlay lines -->
                 <line x1="10" y1="50" x2="40" y2="50" stroke="#00f5c4" stroke-width="1.5" opacity="0.5"/>
                 <line x1="160" y1="50" x2="190" y2="50" stroke="#00f5c4" stroke-width="1.5" opacity="0.5"/>
                 <circle cx="100" cy="82" r="42" fill="none" stroke="#00f5c4" stroke-width="0.8" opacity="0.3" stroke-dasharray="4 4"/>
-                <!-- Initials overlay -->
                 <text x="100" y="92" text-anchor="middle" font-family="Syne, sans-serif" font-size="36" font-weight="800" fill="white" opacity="0.95">KM</text>
               </svg>
             </div>
-            <img id="userImage" src="image.png" alt="Koushik M" style="display:none;" onerror="this.style.display='none'; document.getElementById('avatarDisplay').style.display='flex';" onload="this.style.display='block'; document.getElementById('avatarDisplay').style.display='none';" />
+            <img id="userImage" src="image.png" alt="Koushik M" style="display:none;"
+              onerror="this.style.display='none'; document.getElementById('avatarDisplay').style.display='flex';"
+              onload="this.style.display='block'; document.getElementById('avatarDisplay').style.display='none';" />
           </div>
-          <!-- Floating badges -->
           <div class="float-badge badge-ai">🤖 Gen AI</div>
           <div class="float-badge badge-fs">⚡ Full Stack</div>
           <div class="float-badge badge-ml">🧠 ML</div>
         </div>
       </div>
     </div>
-
-    <!-- Scroll indicator -->
     <div class="scroll-hint">
       <span>scroll</span>
       <div class="scroll-line"></div>
@@ -176,7 +171,7 @@
     <div class="section-header">
       <span class="section-label">// 02</span>
       <h2>Featured Projects</h2>
-      <p>AI-powered applications built from scratch</p>
+      <p>AI-powered applications built from scratch — live and open source</p>
     </div>
 
     <div class="projects-grid">
@@ -194,20 +189,21 @@
         <h3 class="project-title">PathFinder</h3>
         <p class="project-subtitle">AI Career Guidance Platform</p>
         <p class="project-desc">
-          Enter your subjects and skills — PathFinder's AI engine analyzes your profile 
-          and maps out the exact job roles you're best suited for, complete with growth 
+          Enter your subjects and skills — PathFinder's AI engine analyzes your profile
+          and maps out the exact job roles you're best suited for, complete with growth
           trajectories and skill-gap analysis.
         </p>
         <div class="project-tags">
           <span>Gen AI</span><span>Python</span><span>React</span><span>NLP</span>
         </div>
-        <div class="project-footer">
-          <div class="project-stat">
-            <span class="stat-num">∞</span>
-            <span class="stat-label">Career Paths</span>
-          </div>
-          <a href="https://github.com/Koushik6699" target="_blank" class="project-link">
-            View Project <span>→</span>
+        <div class="project-links-row">
+          <a href="https://github.com/Koushik6699/AIML_project" target="_blank" class="proj-btn proj-btn-ghost">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://pathfinderaiml.netlify.app/" target="_blank" class="proj-btn proj-btn-solid">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
           </a>
         </div>
       </div>
@@ -225,20 +221,21 @@
         <h3 class="project-title">AI Interview Taker</h3>
         <p class="project-subtitle">Real-Time Interview Simulator</p>
         <p class="project-desc">
-          A live AI interviewer that adapts questions dynamically based on your domain 
-          and knowledge level. Practice interviews, get real-time feedback, and sharpen 
+          A live AI interviewer that adapts questions dynamically based on your domain
+          and knowledge level. Practice interviews, get real-time feedback, and sharpen
           your responses before the actual day.
         </p>
         <div class="project-tags">
           <span>LLM</span><span>Real-Time</span><span>Python</span><span>JS</span>
         </div>
-        <div class="project-footer">
-          <div class="project-stat">
-            <span class="stat-num">100%</span>
-            <span class="stat-label">Adaptive AI</span>
-          </div>
-          <a href="https://github.com/Koushik6699" target="_blank" class="project-link">
-            View Project <span>→</span>
+        <div class="project-links-row">
+          <a href="https://github.com/Koushik6699/interview.ai" target="_blank" class="proj-btn proj-btn-ghost">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://ai-intervw.netlify.app/" target="_blank" class="proj-btn proj-btn-solid">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
           </a>
         </div>
       </div>
@@ -256,20 +253,21 @@
         <h3 class="project-title">Disease Predictor</h3>
         <p class="project-subtitle">ML-Powered Symptom Analyzer</p>
         <p class="project-desc">
-          Input your symptoms and receive a precise disease prediction powered by 
-          machine learning models trained on medical datasets. Early awareness that 
+          Input your symptoms and receive a precise disease prediction powered by
+          machine learning models trained on medical datasets. Early awareness that
           guides you toward the right healthcare decisions.
         </p>
         <div class="project-tags">
           <span>ML</span><span>Python</span><span>Healthcare</span><span>Scikit</span>
         </div>
-        <div class="project-footer">
-          <div class="project-stat">
-            <span class="stat-num">AI</span>
-            <span class="stat-label">Diagnostics</span>
-          </div>
-          <a href="https://github.com/Koushik6699" target="_blank" class="project-link">
-            View Project <span>→</span>
+        <div class="project-links-row">
+          <a href="https://github.com/Koushik6699/Disease-Predictor" target="_blank" class="proj-btn proj-btn-ghost">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://disease-predictor-and-report.netlify.app/" target="_blank" class="proj-btn proj-btn-solid">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
           </a>
         </div>
       </div>
@@ -287,20 +285,21 @@
         <h3 class="project-title">Financial Advisor</h3>
         <p class="project-subtitle">Personalized Investment Intelligence</p>
         <p class="project-desc">
-          Set your financial goals and let the AI craft a complete, personalized 
-          roadmap — from where to invest, how to allocate assets, risk assessment, 
+          Set your financial goals and let the AI craft a complete, personalized
+          roadmap — from where to invest, how to allocate assets, risk assessment,
           to milestone tracking toward your target wealth.
         </p>
         <div class="project-tags">
           <span>Gen AI</span><span>FinTech</span><span>Python</span><span>React</span>
         </div>
-        <div class="project-footer">
-          <div class="project-stat">
-            <span class="stat-num">360°</span>
-            <span class="stat-label">Financial View</span>
-          </div>
-          <a href="https://github.com/Koushik6699" target="_blank" class="project-link">
-            View Project <span>→</span>
+        <div class="project-links-row">
+          <a href="https://github.com/Koushik6699/AI-financial-advisor" target="_blank" class="proj-btn proj-btn-ghost proj-btn-ghost-purple">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://finance-advisor-ai.netlify.app/" target="_blank" class="proj-btn proj-btn-solid proj-btn-solid-purple">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
           </a>
         </div>
       </div>
@@ -308,7 +307,7 @@
     </div>
   </section>
 
-  <!-- About / Education -->
+  <!-- Education & Vision -->
   <section class="about-section">
     <div class="section-header">
       <span class="section-label">// 03</span>
@@ -322,6 +321,18 @@
           <h3>B.Tech Computer Science Engineering</h3>
           <p class="edu-school">Amity University · Bengaluru</p>
           <span class="edu-spec">Specialization: Artificial Intelligence & Machine Learning</span>
+          <div class="cgpa-badge">
+            <div class="cgpa-left">
+              <span class="cgpa-label">Current CGPA</span>
+              <div class="cgpa-value-row">
+                <span class="cgpa-value">8.31</span>
+                <span class="cgpa-scale">/ 10.0</span>
+              </div>
+            </div>
+            <div class="cgpa-bar-wrap">
+              <div class="cgpa-bar" style="--cgpa-pct: 83.1%"></div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="vision-block">
